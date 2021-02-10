@@ -21,9 +21,7 @@ public class StringEvaluator {
      */
     public static Boolean elementExists(String[] array, String string){
         for (int i=0; i< array.length; i++){
-            if (array[i].equals(string)){
-                return true;
-            }
+            if (array[i].equals(string)){ return true; }
         }
         return false;
     }
@@ -34,16 +32,24 @@ public class StringEvaluator {
             String sub = "";
             for (int j=i; j<string.length(); j++){
                 sub = sub + String.valueOf(string.charAt(j));
-                if (!elementExists(answer, sub)){
-                    answer = addElement(answer, sub);
-                }
+                if (!elementExists(answer, sub)){ answer = addElement(answer, sub); }
             }
         }
         return answer;
     }
 
     public static String[] getCommonSubstrings(String string1, String string2) {
-        return null;
+        String[] subs1 = getAllSubstrings(string1);
+        String[] subs2 = getAllSubstrings(string2);
+        String[] answer = new String[0];
+        for (int i=0; i<subs1.length; i++){
+            for (int j=0; j< subs2.length; j++){
+                if (subs1[i].equals(subs2[j]) && (!elementExists(answer, subs1[i]))){
+                    answer = addElement(answer, subs1[i]);
+                }
+            }
+        }
+        return answer;
     }
 
     public static String getLargestCommonSubstring(String string1, String string2) {
